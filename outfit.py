@@ -3,10 +3,21 @@ from pydantic import BaseModel
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
 from langchain.llms import Cohere
+from fastapi.middleware.cors import CORSMiddleware  # Import CORSMiddleware
+
 import os
 
 # Initialize FastAPI app
 app = FastAPI()
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allow all origins, adjust as necessary
+    allow_credentials=True,
+    allow_methods=["*"],  # Allow all HTTP methods
+    allow_headers=["*"],  # Allow all headers
+)
 
 # Retrieve Cohere API key from environment variables for security
 api_key = "MxvL30WkPvcCspBoqRuRPWDIZpBSgZdZwvkY4sqA"
